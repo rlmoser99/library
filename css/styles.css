@@ -18,3 +18,50 @@ h1 {
   grid-template-columns: repeat(4, 1fr);
   margin: 1rem 0;
 }
+
+/* New Book Form inside Modal */
+.form-field {
+  margin: 1rem 0;
+}
+
+form input {
+  height: 2rem;
+  margin-top: .25rem;
+  padding: 5px;
+  width: 100%;
+}
+
+.flex-row {
+  align-items: center;
+  display: flex;
+}
+
+input[type="checkbox"] {
+  margin-right: .5rem;
+  width: 2rem;
+}
+
+.modal {
+  background: white;
+  margin: 2rem auto;
+  max-width: 400px;
+  padding: 1rem;
+  z-index: 2;
+}
+
+.modal-background {
+  background: rgba(51, 51, 51, 0.9);
+  color: black;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.modal-cancel {
+  color: red;
+  cursor: pointer;
+}

@@ -1,5 +1,10 @@
 let myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [];
 
+const bookForm = document.querySelector('form');
+const modalButton = document.querySelector('.modal-button');
+const modalBackground = document.querySelector('.modal-background');
+const modalCancel = document.querySelector('.modal-cancel');
+
 class Book {
   constructor(title, author, pages, have_read) {
     this.title = title;
@@ -33,7 +38,13 @@ function displayBook(book) {
   bookCollection.appendChild(bookContainer);
 }
 
-displayCollection();
+function displayModal() {
+  modalBackground.style.display = "block";
+};
+
+function closeModal() {
+  modalBackground.style.display = "none";
+};
 
 const addBook = (event)=>{
   event.preventDefault();
@@ -45,17 +56,15 @@ const addBook = (event)=>{
     document.getElementById('status').checked
   );
 
-  // Do I need validations? 
-
   displayBook(book);
   myLibrary.push(book);
-
-  // Resets the form to be used again, not sure if needed after adding modal?
-  document.querySelector('form').reset();
-
+  bookForm.reset();
+  closeModal();
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary) );
-}
+};
 
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('save').addEventListener('click', addBook);
-});
+displayCollection();
+
+bookForm.addEventListener('submit', addBook);
+modalButton.addEventListener('click', displayModal);
+modalCancel.addEventListener('click', closeModal);

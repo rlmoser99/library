@@ -6,12 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/reset.css" rel="stylesheet" type="text/css" />
   <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="script.js" defer></script>
   <title>rlmoser's library</title>
 </head>
 <body>
 
   <h1>Library</h1>
+
+  <button class="modal-button">
+    <span class="material-icons">add</span>
+    <span class="material-icons">menu_book</span>
+  </button>
+
+  <div class="modal-background">
+    <div class="modal">
+
+      <div class="modal-cancel">
+        <span class="material-icons">close</span>
+      </div>
+
+      <form>
+        <div class="form-field">
+          <label for="title">Title:</label><br />
+          <input type="text" id="title" placeholder="The Title of the Book" required>
+        </div>
+
+        <div class="form-field">
+          <label for="author">Author:</label><br />
+          <input type="text" id="author" placeholder="Author Name" required>
+        </div>
+
+        <div class="form-field">
+          <label for="pages"># of Pages:</label><br />
+          <input type="number" id="pages" placeholder="152" required>
+        </div>
+
+        <div class="form-field flex-row">
+          <input type="checkbox" id="status">
+          <p>check if you've read this book</p>
+        </div>
+
+        <div class="form-field">
+          <input value="Add Book" type="submit">
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div class="book-collection">
     <ul class="headings">
@@ -20,26 +61,6 @@
       <li><strong># of Pages</strong></li>
       <li><strong>Status</strong></li>
     </ul>
-  </div>
-
-  <div>
-    <form>
-
-      <label for="title">Title:</label>
-      <input type="text" id="title" placeholder="The Title of the Book">
-
-      <label for="author">Author:</label>
-      <input type="text" id="author" placeholder="Author Name">
-
-      <label for="pages"># of Pages:</label>
-      <input type="number" id="pages" placeholder="152">
-
-      <label for="status">Have Read:</label>
-      <input type="checkbox" id="status">
-
-      <button type="submit" id="save">Add Book</button>
-
-    </form>
   </div>
 
 </body>
