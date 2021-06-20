@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [];
 
 class Book {
   constructor(title, author, pages, have_read) {
@@ -9,18 +9,14 @@ class Book {
   }
 }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book)
-}
-
 function displayCollection() {
-  const bookCollection = document.querySelector('.book-collection');
   myLibrary.forEach(function(book){
-    bookCollection.appendChild(displayBook(book));
+    displayBook(book)
   })
 }
 
 function displayBook(book) {
+  const bookCollection = document.querySelector('.book-collection');
   const bookContainer = document.createElement('ul');
   const title = document.createElement('li');
   const author = document.createElement('li');
@@ -34,16 +30,32 @@ function displayBook(book) {
   bookContainer.appendChild(author);
   bookContainer.appendChild(pages);
   bookContainer.appendChild(have_read);
-  return bookContainer;
+  bookCollection.appendChild(bookContainer);
 }
 
-// Temporary book data
-const applesBook = new Book('Apples', 'Amy Atkins', '123', false)
-const bananasBook = new Book('Bananas', 'Beth Baker', '456', false)
-const cookiesBook = new Book('Cookies', 'Carl Clark', '789', true)
-
-addBookToLibrary(applesBook);
-addBookToLibrary(bananasBook);
-addBookToLibrary(cookiesBook);
-
 displayCollection();
+
+const addBook = (event)=>{
+  event.preventDefault();
+
+  const book =  new Book(
+    document.getElementById('title').value,
+    document.getElementById('author').value,
+    document.getElementById('pages').value,
+    document.getElementById('status').checked
+  );
+
+  // Do I need validations? 
+
+  displayBook(book);
+  myLibrary.push(book);
+
+  // Resets the form to be used again, not sure if needed after adding modal?
+  document.querySelector('form').reset();
+
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary) );
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('save').addEventListener('click', addBook);
+});
