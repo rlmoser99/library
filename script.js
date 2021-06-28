@@ -32,13 +32,19 @@ function displayBook(book) {
   const pages = document.createElement('li');
   const have_read = document.createElement('li');
   const remove_book = document.createElement('li');
+  const checkbox = document.createElement('input');
+  checkbox.type = "checkbox";
+  checkbox.id = "status";
+  checkbox.checked = book.have_read ? true : false;
+  checkbox.classList.add("read-status");
+  checkbox.setAttribute('data-book-index', book.id);
   const delete_btn = document.createElement('button');
   delete_btn.classList.add("remove-book");
   delete_btn.textContent = "remove"
   title.textContent = book.title;
   author.textContent = book.author;
   pages.textContent = book.pages;
-  have_read.textContent = book.have_read ? 'read' : 'not yet read';
+  have_read.appendChild(checkbox);
   delete_btn.setAttribute('data-book-index', book.id);
   bookContainer.appendChild(title);
   bookContainer.appendChild(author);
@@ -72,6 +78,13 @@ function removeBook(number) {
   displayCollection();
 };
 
+function toggleStatus(number) {
+  book = myLibrary[number]
+  book.have_read = !book.have_read;
+  localStorage.removeItem('myLibrary');
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary) );
+}
+
 const addBook = (event)=>{
   event.preventDefault();
 
@@ -98,5 +111,7 @@ modalCancel.addEventListener('click', closeModal);
 document.addEventListener('click', function(event) {
   if (event.target.className === 'remove-book') {
     removeBook(event.target.getAttribute('data-book-index'));
+  } else if (event.target.className === 'read-status') {
+    toggleStatus(event.target.getAttribute('data-book-index'));
   }
 });
